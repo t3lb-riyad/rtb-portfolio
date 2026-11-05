@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c1014">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Dashboard</title>
+
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!--
+    PRIVATE DASHBOARD
+    Not linked from the portfolio in any way. Open it by typing /dash.html.
+    It needs the Supabase service role key because the anon role has no
+    SELECT policy on the two tables. The key is kept in sessionStorage only
+    and is never written to disk. See supabase.sql for the setup notes.
+  -->
+
+  <main class="dash">
+    <header class="dash__head">
+      <h1 class="dash__title">Dashboard</h1>
+      <button class="btn btn--ghost" type="button" id="dash-refresh">Refresh</button>
+    </header>
+
+    <section class="dash__section">
+      <p class="dash__label">Hearts</p>
+      <p class="dash__num" id="dash-hearts">--</p>
+    </section>
+
+    <section class="dash__section">
+      <p class="dash__label">Follows</p>
+      <ul class="dash__list" id="dash-follows"></ul>
+      <p class="dash__note" id="dash-note"></p>
+    </section>
+
+    <section class="dash__section" id="dash-key-section" hidden>
+      <p class="dash__label">Service key</p>
+      <form class="dash__form" id="dash-key-form">
+        <input class="input" id="dash-key" type="password" autocomplete="off" spellcheck="false">
+        <button class="btn btn--accent" type="submit">Load</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="js/data.js" defer></script>
+  <script src="js/dash.js" defer></script>
+</body>
+</html>

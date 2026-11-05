@@ -1,0 +1,1459 @@
+/* =========================================================================
+   style.css
+   Instagram dark mode. Three colors only: #f5f5f5, #0c1014, #ffd742.
+   Depth comes from alpha layers and blur, never from gradients.
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   1. Tokens
+   ------------------------------------------------------------------------- */
+:root {
+  --white: #f5f5f5;
+  --black: #0c1014;
+  --accent: #ffd742;
+  --like: #ff3040;
+
+  --surface: rgba(245, 245, 245, 0.055);
+  --surface-2: rgba(245, 245, 245, 0.085);
+  --hairline: rgba(245, 245, 245, 0.13);
+  --hairline-strong: rgba(245, 245, 245, 0.22);
+
+  --text: #f5f5f5;
+  --text-dim: rgba(245, 245, 245, 0.72);
+  --muted: rgba(245, 245, 245, 0.45);
+
+  --nav-h: 60px;
+  --safe: env(safe-area-inset-bottom, 0px);
+  --nav-bottom: calc(12px + var(--safe));
+  --stack-bottom: calc(var(--nav-bottom) + var(--nav-h) + 14px);
+
+  --reel-top: 14px;
+  --stack-reserve: 236px;
+
+  /* Home reel geometry.
+     The project image is a square centred in a 9:16 stage. We lift that square
+     so its bottom edge ends exactly on the bottom of the heart button; the
+     avatar and the heart are the only things allowed to overlap the photo.
+     The lift grows on short screens and is capped so the photo never leaves
+     the top. 135px = caption line (19) + gap (10) + visit button (40) + gap
+     (10) + share button (46) + gap (10), measured up from the heart's bottom. */
+  --reel-media: min(100vw, var(--col), 56.25dvh);
+  --reel-gap: calc((100dvh - var(--reel-media)) / 2);
+  --reel-clear: calc(var(--stack-bottom) + 135px);
+  --reel-lift: max(0px, min(
+    calc(var(--reel-clear) - var(--reel-gap)),
+    calc(var(--reel-gap) - var(--reel-top))
+  ));
+
+  --col: 480px;
+  --gutter: max(12px, calc((100vw - var(--col)) / 2 + 12px));
+  --edge: max(12px, calc((100vw - var(--col)) / 2 + 12px));
+
+  --radius: 14px;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* -------------------------------------------------------------------------
+   2. Reset and base
+   ------------------------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--black);
+  color: var(--white);
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3, p, ol, ul {
+  margin: 0;
+}
+
+[hidden] { display: none !important; }
+
+.icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  flex: none;
+}
+
+.muted { color: var(--muted); }
+
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* -------------------------------------------------------------------------
+   3. Liquid glass
+   Built with alpha layers and blur only. No gradient anywhere.
+   ------------------------------------------------------------------------- */
+.glass {
+  background: rgba(245, 245, 245, 0.06);
+  border: 1px solid var(--hairline);
+  box-shadow:
+    inset 0 1px 0 rgba(245, 245, 245, 0.16),
+    0 10px 30px rgba(12, 16, 20, 0.55);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  backdrop-filter: blur(22px) saturate(180%);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass { background: rgba(12, 16, 20, 0.92); }
+}
+
+/* -------------------------------------------------------------------------
+   4. Views
+   ------------------------------------------------------------------------- */
+.view {
+  display: none;
+  height: 100dvh;
+  height: 100vh; /* fallback for old browsers */
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.view[data-active] { display: block; }
+
+#view-home { overflow: hidden; }
+
+.page {
+  width: min(100%, var(--col));
+  margin: 0 auto;
+  padding: 30px 18px calc(var(--stack-bottom) + 28px);
+}
+
+.page__title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+/* -------------------------------------------------------------------------
+   5. Home feed and reels
+   ------------------------------------------------------------------------- */
+.feed {
+  height: 100dvh;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.feed::-webkit-scrollbar { display: none; }
+
+.reel {
+  height: 100dvh;
+  height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.reel__media {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 0;
+}
+
+/* -------------------------------------------------------------------------
+   6. Carousel (6 images, 1:1, horizontal snap)
+   ------------------------------------------------------------------------- */
+.carousel {
+  position: relative;
+  width: min(
+    100%,
+    calc(100dvh - var(--reel-top) - var(--stack-bottom) - var(--stack-reserve) - 10px)
+  );
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.carousel__track {
+  display: flex;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  border-radius: inherit;
+  touch-action: pan-x pan-y;
+}
+
+.carousel__track::-webkit-scrollbar { display: none; }
+
+.carousel__slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  scroll-snap-align: center;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.carousel__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel__slide img.is-missing { opacity: 0; }
+
+/* Home reels: 9:16 vertical stage with a centred 1:1 project image.
+   The stage width is capped so its height always fits the viewport. */
+.reel .carousel {
+  width: min(100%, var(--col), 56.25dvh);
+  width: var(--reel-media);
+  aspect-ratio: 9 / 16;
+  border-radius: 0;
+  background: var(--black);
+  container-type: inline-size;
+}
+
+.reel .carousel__slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--black);
+  /* Centring inside a shorter content box lifts the photo by --reel-lift. */
+  padding-bottom: calc(2 * var(--reel-lift, 0px));
+}
+
+.reel .carousel__slide img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.reel .carousel__dots {
+  bottom: 12px;
+  /* Stay 18px under the lifted photo. */
+  bottom: calc((100% - 100cqw) / 2 - 18px + var(--reel-lift, 0px));
+}
+
+.carousel__dots {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: rgba(12, 16, 20, 0.35);
+  pointer-events: none;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(245, 245, 245, 0.4);
+  transition: background-color 0.16s var(--ease), transform 0.16s var(--ease);
+}
+
+.dot.is-active {
+  background: var(--accent);
+  transform: scale(1.25);
+}
+
+/* -------------------------------------------------------------------------
+   7. Floating actions (above the nav, never touching it)
+   ------------------------------------------------------------------------- */
+.reel-actions {
+  position: fixed;
+  left: var(--edge);
+  right: var(--edge);
+  bottom: var(--stack-bottom);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.reel-actions > * { pointer-events: auto; }
+
+/* The like/share rail stays on the right, like a reels app. */
+#home-avatar,
+#home-heart,
+#home-share { align-self: flex-end; }
+
+/* Profile photo on the reels rail: a 30px circle inside the same 46px
+   tap target as the heart, so the two glyphs line up on the right edge. */
+.reel-avatar {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 50%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reel-avatar img {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--surface);
+  box-shadow:
+    0 0 0 1.5px rgba(245, 245, 245, 0.7),
+    0 1px 6px rgba(12, 16, 20, 0.85);
+  transition: transform 0.16s var(--ease), box-shadow 0.16s var(--ease);
+}
+
+.reel-avatar img.is-missing { opacity: 0; }
+
+@media (hover: hover) and (pointer: fine) {
+  .reel-avatar:hover img {
+    transform: scale(1.08);
+    box-shadow:
+      0 0 0 1.5px var(--accent),
+      0 2px 10px rgba(12, 16, 20, 0.9);
+  }
+}
+
+.reel-avatar:active img { transform: scale(0.94); }
+
+.reel-caption {
+  width: 100%;
+  text-align: left;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-dim);
+  text-shadow: 0 1px 5px rgba(12, 16, 20, 0.85);
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+}
+
+.icon-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 0;
+  color: var(--white);
+  flex: none;
+  filter: drop-shadow(0 1px 4px rgba(12, 16, 20, 0.85));
+}
+
+.icon-btn .icon { width: 30px; height: 30px; }
+
+.icon-btn--sm {
+  width: 34px;
+  height: 34px;
+}
+
+.icon-btn--sm .icon { width: 18px; height: 18px; }
+
+.icon-btn.is-liked { color: var(--like); }
+
+/* Double-tap heart: pops at the touch point, floats up, fades out. */
+.heart-pop {
+  position: fixed;
+  z-index: 60;
+  width: 96px;
+  height: 96px;
+  margin: -48px 0 0 -48px;
+  color: var(--like);
+  pointer-events: none;
+  filter: drop-shadow(0 8px 20px rgba(255, 48, 64, 0.32));
+  animation: heart-pop 900ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.heart-pop .icon { width: 100%; height: 100%; }
+
+@keyframes heart-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.35) rotate(-9deg);
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(0) scale(1.1) rotate(3deg);
+  }
+  32% {
+    transform: translateY(0) scale(0.97) rotate(0deg);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(-16px) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-60px) scale(1.05) rotate(0deg);
+  }
+}
+
+/* -------------------------------------------------------------------------
+   8. Buttons
+   ------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 10px;
+  border: 1px solid var(--hairline);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  transition: transform 0.12s var(--ease), background-color 0.12s var(--ease), box-shadow 0.16s var(--ease);
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn--accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--black);
+}
+
+/* Follow: solid accent yellow; it turns black with a "Followed" label once
+   the visitor submits their name. */
+.btn--follow {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--black);
+  font-weight: 700;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn--follow:not(.is-following):hover {
+    background: var(--accent);
+    border-color: var(--text);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.55),
+      0 8px 24px rgba(255, 215, 66, 0.28);
+  }
+}
+
+.btn--ghost {
+  background: var(--surface);
+  border-color: var(--hairline-strong);
+  color: var(--text);
+}
+
+.btn--visit {
+  height: 40px;
+  background: transparent;
+  border-color: var(--white);
+  color: var(--white);
+  box-shadow: none;
+}
+
+.btn--visit:active {
+  background: rgba(245, 245, 245, 0.1);
+}
+
+.btn--block { width: 100%; }
+
+.btn--follow.is-following {
+  background: var(--black);
+  border-color: rgba(245, 245, 245, 0.2);
+  color: var(--text);
+  box-shadow: inset 0 1px 0 rgba(245, 245, 245, 0.08);
+  cursor: default;
+}
+
+/* -------------------------------------------------------------------------
+   9. End of feed
+   ------------------------------------------------------------------------- */
+.reel--end {
+  justify-content: center;
+  padding: var(--reel-top) var(--gutter) calc(var(--stack-bottom) + var(--stack-reserve));
+}
+
+.end-card {
+  width: min(100%, 340px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+  text-align: center;
+  padding: 28px 22px;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  box-shadow:
+    inset 0 1px 0 rgba(245, 245, 245, 0.07),
+    0 18px 50px rgba(12, 16, 20, 0.45),
+    0 0 70px rgba(255, 215, 66, 0.045);
+}
+
+.end-card__title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* -------------------------------------------------------------------------
+   10. Nav bar
+   ------------------------------------------------------------------------- */
+.nav {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: var(--nav-bottom);
+  width: min(calc(100vw - 32px), calc(var(--col) - 32px));
+  height: var(--nav-h);
+  padding: 0 10px;
+  border-radius: 28px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  z-index: 40;
+  background: rgba(25, 30, 35, 0.44);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 30px rgba(12, 16, 20, 0.4);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(10px) saturate(140%);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nav { background: rgba(25, 30, 35, 0.96); }
+}
+
+.nav__item {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  color: rgba(245, 245, 245, 0.55);
+  border-radius: 16px;
+  transition: color 0.18s var(--ease);
+}
+
+.nav__item .icon {
+  position: relative;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.5;
+}
+
+/* Instagram-style profile tab: a small circular avatar instead of an icon. */
+.nav__avatar {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  opacity: 0.7;
+  filter: saturate(0.85);
+  transition: opacity 0.18s var(--ease), border-color 0.18s var(--ease),
+    filter 0.18s var(--ease), box-shadow 0.18s var(--ease);
+}
+
+.nav__item.is-active .nav__avatar {
+  opacity: 1;
+  filter: none;
+  border-color: var(--white);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.14);
+}
+
+/* iOS segmented-control capsule. */
+.nav__item::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 56px;
+  height: 38px;
+  transform: translate(-50%, -50%) scale(0.86);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 1px 4px rgba(12, 16, 20, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  opacity: 0;
+  transition: opacity 0.18s var(--ease), transform 0.18s var(--ease);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.nav__item.is-active { color: var(--white); }
+
+.nav__item.is-active .icon { stroke-width: 1.9; }
+
+.nav__item.is-active::before {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.nav__item:active { color: var(--white); }
+
+/* -------------------------------------------------------------------------
+   11. First visit hint
+   ------------------------------------------------------------------------- */
+.hint {
+  position: fixed;
+  left: 50%;
+  top: 58%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(12, 16, 20, 0.66);
+  border: 1px solid var(--hairline);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  font-size: 13px;
+  color: var(--text-dim);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.hint__chev {
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  animation: bob 1.4s ease-in-out infinite;
+}
+
+.hint__chev .icon { width: 16px; height: 16px; }
+
+@keyframes bob {
+  0%, 100% { transform: translateY(2px); opacity: 0.55; }
+  50% { transform: translateY(-3px); opacity: 1; }
+}
+
+/* -------------------------------------------------------------------------
+   12. Contact
+   ------------------------------------------------------------------------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.contact-tile {
+  --rx: 0deg;
+  --ry: 0deg;
+  --press: 1;
+  --lift: 0px;
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 0.9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  box-shadow: inset 0 1px 0 rgba(245, 245, 245, 0.06);
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+  transform:
+    perspective(640px)
+    translateY(var(--lift))
+    rotateX(var(--rx))
+    rotateY(var(--ry))
+    scale(var(--press));
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition:
+    background-color 0.18s var(--ease),
+    border-color 0.18s var(--ease),
+    transform 0.16s var(--ease),
+    box-shadow 0.2s var(--ease);
+}
+
+/* Reflection that follows the finger; only visible while the tile is tilted. */
+.contact-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--mx) var(--my),
+    rgba(245, 245, 245, 0.16) 0%,
+    rgba(245, 245, 245, 0.05) 32%,
+    transparent 62%);
+  opacity: 0;
+  transition: opacity 0.18s var(--ease);
+}
+
+.contact-tile.is-tilting::after { opacity: 1; }
+
+.contact-tile .icon,
+.contact-tile__label {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.18s var(--ease), color 0.18s var(--ease);
+}
+
+/* Hover lift for mouse/trackpad devices only; touch keeps the press state. */
+@media (hover: hover) and (pointer: fine) {
+  .contact-tile:hover {
+    --lift: -3px;
+    background: var(--surface-2);
+    border-color: rgba(255, 215, 66, 0.28);
+    box-shadow:
+      inset 0 1px 0 rgba(245, 245, 245, 0.1),
+      0 14px 30px rgba(12, 16, 20, 0.45);
+  }
+
+  .contact-tile:hover .icon { transform: translateY(-1px) scale(1.08); }
+  .contact-tile:hover .contact-tile__label { color: var(--text); }
+}
+
+/* The tilt is driven by the pointer (see initContactTilt), so this rule only
+   adds the quick press response for taps. */
+.contact-tile:active {
+  --press: 0.97;
+  --lift: 0px;
+  background: var(--surface-2);
+  border-color: rgba(255, 215, 66, 0.32);
+  box-shadow: inset 0 2px 10px rgba(12, 16, 20, 0.5);
+  transition-duration: 0.06s;
+}
+
+.contact-tile.is-tilting { transition-duration: 0.07s; }
+
+.contact-tile .icon {
+  width: 26px;
+  height: 26px;
+  color: var(--accent);
+}
+
+.contact-tile__label {
+  font-size: 12.5px;
+  color: var(--text-dim);
+}
+
+/* -------------------------------------------------------------------------
+   13. Terms and privacy accordions
+   ------------------------------------------------------------------------- */
+.acc { border-top: 1px solid var(--hairline); }
+
+.acc:last-child { border-bottom: 1px solid var(--hairline); }
+
+.acc__head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 2px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.acc__chev {
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  transition: transform 0.2s var(--ease);
+}
+
+.acc__chev .icon { width: 20px; height: 20px; }
+
+.acc__head[aria-expanded="true"] .acc__chev { transform: rotate(180deg); }
+
+.acc__body {
+  padding: 0 2px 24px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+
+.acc__sub {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 18px 0 6px;
+}
+
+.acc__no { color: var(--accent); }
+
+.acc__body p + p { margin-top: 10px; }
+
+.clauses {
+  padding-left: 22px;
+  margin: 0;
+}
+
+.clauses li {
+  margin-bottom: 14px;
+  padding-left: 4px;
+}
+
+.clauses li:last-child { margin-bottom: 0; }
+
+.clauses li::marker { color: var(--accent); }
+
+.clauses strong { color: var(--text); }
+
+/* -------------------------------------------------------------------------
+   14. Profile
+   ------------------------------------------------------------------------- */
+.profile-head {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 14px 0 20px;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  box-shadow: 0 8px 30px rgba(12, 16, 20, 0.45), 0 0 40px rgba(255, 215, 66, 0.06);
+}
+
+.avatar--lg {
+  width: 88px;
+  height: 88px;
+}
+
+.profile-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.profile-stat__num {
+  font-size: 22px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.profile-stat__label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.profile-name {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.profile-bio {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-dim);
+  white-space: pre-line;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Bio links: blue and tappable, no underline. */
+.profile-bio a {
+  color: #4da3ff;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.profile-bio a:hover { color: #7cbcff; }
+
+.profile-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 18px 0 4px;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--hairline);
+  margin-top: 18px;
+  position: sticky;
+  top: 0;
+  background: var(--black);
+  z-index: 2;
+}
+
+.tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0;
+  line-height: 0;
+  color: var(--muted);
+}
+
+.tab .icon { width: 22px; height: 22px; }
+
+.tab.is-active { color: var(--text); }
+
+.tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin: 0 -16px;
+}
+
+.post-cell {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--surface);
+  overflow: hidden;
+  padding: 0;
+}
+
+.post-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-cell img.is-missing { opacity: 0; }
+
+/* -------------------------------------------------------------------------
+   15. Skills
+   ------------------------------------------------------------------------- */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.skill-card {
+  aspect-ratio: 1 / 0.9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  box-shadow:
+    inset 0 1px 0 rgba(245, 245, 245, 0.06),
+    0 0 50px rgba(255, 215, 66, 0.03);
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color 0.18s var(--ease),
+    border-color 0.18s var(--ease),
+    transform 0.16s var(--ease),
+    box-shadow 0.2s var(--ease);
+}
+
+.skill-card .icon,
+.skill-card__name {
+  transition: transform 0.18s var(--ease), color 0.18s var(--ease);
+}
+
+/* Hover lift for mouse/trackpad devices only; touch keeps the press state. */
+@media (hover: hover) and (pointer: fine) {
+  .skill-card:hover {
+    transform: translateY(-3px);
+    background: var(--surface-2);
+    border-color: rgba(255, 215, 66, 0.28);
+    box-shadow:
+      inset 0 1px 0 rgba(245, 245, 245, 0.1),
+      0 14px 30px rgba(12, 16, 20, 0.45),
+      0 0 30px rgba(255, 215, 66, 0.06);
+  }
+
+  .skill-card:hover .icon { transform: translateY(-1px) scale(1.08); }
+  .skill-card:hover .skill-card__name { color: var(--text); }
+}
+
+.skill-card:active {
+  transform: scale(0.97);
+  background: var(--surface-2);
+  border-color: rgba(255, 215, 66, 0.32);
+  transition-duration: 0.06s;
+}
+
+.skill-card .icon {
+  width: 34px;
+  height: 34px;
+  color: var(--accent);
+}
+
+.skill-card__name {
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--text-dim);
+}
+
+.btn--certificates {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 8px;
+}
+
+/* -------------------------------------------------------------------------
+   16. Project detail view
+   ------------------------------------------------------------------------- */
+.post-wrap {
+  width: min(100%, var(--col));
+  margin: 0 auto;
+  padding: 10px 12px calc(var(--stack-bottom) + 24px);
+}
+
+.post-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0 12px;
+}
+
+.post-head__back,
+.post-head__next {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  color: var(--text);
+}
+
+.post-head__next {
+  margin-left: auto;
+  color: var(--accent);
+}
+
+.post-head__handle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.post-wrap .carousel {
+  width: 100%;
+  max-width: 100%;
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0 2px;
+}
+
+.post-caption {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text-dim);
+  white-space: pre-line;
+  margin: 4px 0 18px;
+}
+
+.btn--ask {
+  width: 100%;
+  height: 46px;
+  margin-bottom: 6px;
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(12, 16, 20, 0.45);
+}
+
+/* -------------------------------------------------------------------------
+   17. Follow sheet
+   ------------------------------------------------------------------------- */
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.sheet__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 16, 20, 0.62);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.sheet__panel {
+  position: relative;
+  width: min(100%, var(--col));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 16px calc(20px + var(--safe));
+  border-radius: 22px 22px 0 0;
+  background: rgba(12, 16, 20, 0.94);
+  animation: sheet-in 0.22s var(--ease);
+}
+
+@keyframes sheet-in {
+  from { transform: translateY(26px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+.sheet__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sheet__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+.input {
+  height: 48px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid var(--hairline-strong);
+  background: rgba(245, 245, 245, 0.06);
+  color: var(--text);
+  font-size: 16px; /* keeps iOS from zooming on focus */
+  outline: none;
+}
+
+.input::placeholder { color: var(--muted); }
+
+.input:focus { border-color: var(--accent); }
+
+/* -------------------------------------------------------------------------
+   18. Dashboard (dash.html only, not linked from the app)
+   ------------------------------------------------------------------------- */
+.dash {
+  width: min(100%, var(--col));
+  margin: 0 auto;
+  padding: 28px 16px 40px;
+}
+
+.dash__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.dash__title {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.dash__section {
+  padding: 18px 16px;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  margin-bottom: 14px;
+}
+
+.dash__label {
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.dash__num {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--accent);
+}
+
+.dash__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dash__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 14px;
+}
+
+.dash__row:last-child { border-bottom: 0; }
+
+.dash__time {
+  font-size: 11.5px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.dash__note {
+  font-size: 13px;
+  color: var(--muted);
+  padding: 6px 0;
+}
+
+.dash__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* -------------------------------------------------------------------------
+   19. Reduced motion
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   20. Universal brand splash
+   Full-screen LTR intro overlay. Forced direction keeps the logo -> divider
+   -> slogan sequence identical in RTL and LTR documents. The overlay hides
+   itself with a CSS failsafe at 3.5s even if JavaScript never runs, and
+   app.js removes the node after the fade to release memory.
+   ------------------------------------------------------------------------- */
+.splash-screen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: var(--black);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  direction: ltr !important;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+  animation: pureCssDismissFailsafe 0.5s ease 3.5s forwards;
+}
+
+.splash-screen-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Step 1: centred pulse, then a small slide to the left --- */
+.splash-brand-logo-wrapper {
+  width: 80px;
+  height: 80px;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation:
+    splashInitialPulse 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s forwards,
+    splashSlideLeftToPosition 0.6s cubic-bezier(0.77, 0, 0.175, 1) 1.2s forwards;
+}
+
+.splash-brand-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* --- Step 2: the expanding dividing line --- */
+.splash-vertical-divider {
+  width: 2px;
+  height: 0px;
+  background-color: #f1aa00;
+  margin: 0 0px;
+  opacity: 0;
+  animation: splashExpandDivider 0.4s ease 1.5s forwards;
+}
+
+/* --- Step 3: text reveal mask --- */
+.splash-brand-text-wrapper {
+  overflow: hidden;
+  width: 0px;
+  opacity: 0;
+  white-space: nowrap;
+  will-change: width, opacity;
+  animation: splashRevealSlogan 0.6s cubic-bezier(0.4, 0, 0.2, 1) 1.7s forwards;
+}
+
+.splash-editable-slogan {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--text);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding-left: 15px;
+  margin: 0;
+}
+
+/* --- Step 4: soft footer entrance --- */
+.splash-immutable-footer {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: splashFadeInFooter 0.5s ease 2.2s forwards;
+}
+
+.splash-immutable-footer p {
+  color: var(--text) !important;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* --- Keyframes --- */
+@keyframes splashInitialPulse {
+  0% { transform: scale(0.3); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes splashSlideLeftToPosition {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-10px); }
+}
+
+@keyframes splashExpandDivider {
+  0% { height: 0px; opacity: 0; margin: 0 0px; }
+  100% { height: 50px; opacity: 1; margin: 0 10px; }
+}
+
+@keyframes splashRevealSlogan {
+  0% { width: 0; opacity: 0; }
+  100% {
+    width: 100%;
+    max-width: max-content;
+    opacity: 1;
+  }
+}
+
+@keyframes splashFadeInFooter {
+  0% { opacity: 0; transform: translate(-50%, 10px); }
+  100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes pureCssDismissFailsafe {
+  0% { opacity: 1; visibility: visible; pointer-events: auto; }
+  100% { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+/* Narrow phones: keep the whole logo -> divider -> slogan group inside the
+   viewport so the last letter is never clipped. */
+@media (max-width: 380px) {
+  .splash-editable-slogan {
+    font-size: 1.5rem;
+    letter-spacing: 1.1px;
+    padding-left: 12px;
+  }
+}

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c1014">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MITS RTB | PF">
+  <meta name="description" content="TODO: site description">
+  <title>MITS RTB | PF</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-view="home">
+
+  <!-- =======================================================================
+       BRAND SPLASH (universal intro overlay)
+       First child of <body>. Fades out and unmounts itself after 3.5s.
+       Edit the logo path, slogan and footer text below.
+       ======================================================================= -->
+  <div id="universalAppSplashLoader" class="splash-screen-overlay">
+    <div class="splash-screen-center">
+      <div class="splash-brand-logo-wrapper">
+        <!-- Dynamically configured central asset -->
+        <img src="images/anilogo.png" alt="Brand Logo" class="splash-brand-logo-img">
+      </div>
+
+      <div class="splash-vertical-divider"></div>
+
+      <div class="splash-brand-text-wrapper">
+        <h1 class="splash-editable-slogan">MAKE IT SELF</h1>
+      </div>
+    </div>
+
+    <div class="splash-immutable-footer">
+      <p>Powered by MITS</p>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       VIEW 1 - HOME (project reels)
+       ======================================================================= -->
+  <section class="view" id="view-home" data-view-panel="home">
+
+    <div class="feed" id="scroll-feed">
+
+      <!-- ===================================================================
+           PROJECTS / "SCROLL" SECTION
+           -------------------------------------------------------------------
+           HOW TO ADD A NEW PROJECT
+           1. Copy everything between the START and END markers below.
+           2. Paste it ABOVE the first block (newest project first).
+           3. Change: data-slug, data-title, data-caption and the six image
+              src paths. Keep the folder name equal to data-slug.
+           4. Same slug must exist in the POSTS section further down for the
+              profile grid and the detail view (see section 11 of the brief).
+           DO NOT change class names or data attributes.
+           Adding a block here needs zero JavaScript changes.
+           =================================================================== -->
+
+      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
+      <article class="reel" data-slug="make-it-self" data-title="Make it self" data-caption="Check out the services in MITS website.">
+        <div class="reel__media">
+          <div class="carousel" data-carousel>
+            <div class="carousel__track" data-track>
+              <div class="carousel__slide"><img src="images/MITS/5.webp" alt="" width="1080" height="1080" loading="eager" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/MITS/8.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/MITS/7.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/MITS/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/MITS/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/MITS/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/MITS/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/MITS/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+            </div>
+            <div class="carousel__dots" data-dots aria-hidden="true"></div>
+          </div>
+        </div>
+      </article>
+      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
+
+      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
+      <article class="reel" data-slug="first-project" data-title="first project" data-caption="this was my first project in building websites.">
+        <div class="reel__media">
+          <div class="carousel" data-carousel>
+            <div class="carousel__track" data-track>
+              <div class="carousel__slide"><img src="images/fstWEBSITE/3.webp" alt="" width="1080" height="1080" loading="eager" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/fstWEBSITE/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/fstWEBSITE/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/fstWEBSITE/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/fstWEBSITE/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/fstWEBSITE/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+            </div>
+            <div class="carousel__dots" data-dots aria-hidden="true"></div>
+          </div>
+        </div>
+      </article>
+      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
+
+      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
+      <article class="reel" data-slug="PANCHO" data-title="PANCHO" data-caption="PANCHO MENU QR CODE">
+        <div class="reel__media">
+          <div class="carousel" data-carousel>
+            <div class="carousel__track" data-track>
+              <div class="carousel__slide"><img src="images/PANCHO/5.webp" alt="" width="1080" height="1080" loading="eager" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/PANCHO/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/PANCHO/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/PANCHO/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/PANCHO/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+            </div>
+            <div class="carousel__dots" data-dots aria-hidden="true"></div>
+          </div>
+        </div>
+      </article>
+      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
+
+      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
+      <article class="reel" data-slug="maison-cd" data-title="La Maison CD" data-caption="a special web features for a laptop store.">
+        <div class="reel__media">
+          <div class="carousel" data-carousel>
+            <div class="carousel__track" data-track>
+              <div class="carousel__slide"><img src="images/la maison cd/4.webp" alt="" width="1080" height="1080" loading="eager" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/la maison cd/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/la maison cd/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/la maison cd/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/la maison cd/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/la maison cd/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/la maison cd/7.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/la maison cd/8.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/la maison cd/9.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+            </div>
+            <div class="carousel__dots" data-dots aria-hidden="true"></div>
+          </div>
+        </div>
+      </article>
+      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
+      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
+      <article class="reel" data-slug="QR-menu" data-title="Qr menu" data-caption="a soulotion for restaurants to show their menu in a digital way.">
+        <div class="reel__media">
+          <div class="carousel" data-carousel>
+            <div class="carousel__track" data-track>
+              <div class="carousel__slide"><img src="images/QR-menu/1.webp" alt="" width="1080" height="1080" loading="eager" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/QR-menu/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/QR-menu/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/QR-menu/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/QR-menu/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/QR-menu/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/QR-menu/7.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/QR-menu/8.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+            </div>
+            <div class="carousel__dots" data-dots aria-hidden="true"></div>
+          </div>
+        </div>
+      </article>
+      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
+      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
+      <article class="reel" data-slug="rtb-eats" data-title="RTB Eats" data-caption="A unique web experience for a restaurant.">
+        <div class="reel__media">
+          <div class="carousel" data-carousel>
+            <div class="carousel__track" data-track>
+              <div class="carousel__slide"><img src="images/rtbeats/4.webp" alt="" width="1080" height="1080" loading="eager" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/rtbeats/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/rtbeats/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/rtbeats/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/rtbeats/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/rtbeats/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+            </div>
+            <div class="carousel__dots" data-dots aria-hidden="true"></div>
+          </div>
+        </div>
+      </article>
+      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
+      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
+      <article class="reel" data-slug="clinic-app" data-title="Clinic App" data-caption="An app for managing clinic appointments.">
+        <div class="reel__media">
+          <div class="carousel" data-carousel>
+            <div class="carousel__track" data-track>
+              <div class="carousel__slide"><img src="images/Medical/7.webp" alt="" width="1080" height="1080" loading="eager" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/Medical/8.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/Medical/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/Medical/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/Medical/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/Medical/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/Medical/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/Medical/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+            </div>
+            <div class="carousel__dots" data-dots aria-hidden="true"></div>
+          </div>
+        </div>
+      </article>
+      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
+      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
+      <article class="reel" data-slug="My-room" data-title="My Room" data-caption="I created this to make my mother know where I am.">
+        <div class="reel__media">
+          <div class="carousel" data-carousel>
+            <div class="carousel__track" data-track>
+              <div class="carousel__slide"><img src="images/E-ROOM/6.webp" alt="" width="1080" height="1080" loading="eager" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/E-ROOM/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/E-ROOM/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/E-ROOM/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/E-ROOM/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+              <div class="carousel__slide"><img src="images/E-ROOM/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async"></div>
+            </div>
+            <div class="carousel__dots" data-dots aria-hidden="true"></div>
+          </div>
+        </div>
+      </article>
+      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
+
+      <!-- End of feed. Shown only after the last project. -->
+      <div class="reel reel--end" data-end>
+        <div class="end-card">
+          <h2 class="end-card__title" data-string="homeHeading"></h2>
+          <a class="btn btn--accent" href="#profile" data-string="checkProfile"></a>
+          <button class="btn btn--ghost" type="button" data-retour data-string="anotherTour"></button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Floating actions. Fixed above the nav bar, never touching it. -->
+    <div class="reel-actions" id="home-actions" hidden>
+      <a class="reel-avatar" id="home-avatar" href="#profile" aria-label="Open profile">
+        <img src="icons/profile.jpg" alt="" width="30" height="30" decoding="async">
+      </a>
+      <button class="icon-btn" type="button" id="home-heart" aria-label="Like" aria-pressed="false"></button>
+      <button class="icon-btn" type="button" id="home-share" aria-label="Share"></button>
+      <a class="btn btn--visit" id="home-visit" href="#profile" data-string="visitProject"></a>
+      <p class="reel-caption" id="reel-caption"></p>
+    </div>
+
+  </section>
+
+  <!-- =======================================================================
+       VIEW 2 - CONTACT
+       ======================================================================= -->
+  <section class="view" id="view-contact" data-view-panel="contact">
+    <div class="page page--contact">
+      <h1 class="page__title" data-string="contactHeading"></h1>
+      <!-- Tiles are generated from DATA.SOCIALS in js/app.js -->
+      <div class="contact-grid" id="contact-grid"></div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       VIEW 3 - TERMS
+       ======================================================================= -->
+  <section class="view" id="view-terms" data-view-panel="terms">
+    <div class="page">
+      <h1 class="page__title" data-string="termsHeading"></h1>
+
+      <!-- ---------------- Terms & Conditions ---------------- -->
+      <section class="acc" data-acc>
+        <button class="acc__head" type="button" aria-expanded="true" aria-controls="acc-terms">
+          <span data-string="termsTitle"></span>
+          <span class="acc__chev" data-chev></span>
+        </button>
+        <div class="acc__body" id="acc-terms">
+          <ol class="clauses">
+            <li><strong>30% Advance Payment:</strong> A non-refundable deposit of 30% of the total project cost is required before work begins.</li>
+            <li><strong>Project Timeline:</strong> Estimated delivery dates are provided upfront. Delays caused by client feedback or scope changes may extend the timeline.</li>
+            <li><strong>Free Support Period:</strong> Two weeks of free bug-fixing and minor adjustments are included post-launch.</li>
+            <li><strong>Scope of Work:</strong> Any features beyond the agreed scope will be quoted and billed separately.</li>
+            <li><strong>Intellectual Property:</strong> Full ownership of the final code is transferred only after full payment is received.</li>
+            <li><strong>Confidentiality:</strong> All project details, code, and data are treated as strictly confidential.</li>
+            <li><strong>Revisions:</strong> Up to three rounds of revisions are included. Additional revisions are billed at an hourly rate.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ---------------- Privacy Policy ---------------- -->
+      <section class="acc" data-acc>
+        <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-privacy">
+          <span data-string="privacyTitle"></span>
+          <span class="acc__chev" data-chev></span>
+        </button>
+        <div class="acc__body" id="acc-privacy" hidden>
+          <p class="muted" data-string="lastUpdated"></p>
+
+          <h3 class="acc__sub"><span class="acc__no">1.</span> What this site collects</h3>
+          <p>This site collects only two interactions: a like on a project, and a first name that a visitor chooses to type after pressing the follow button. The hosting provider may also process standard technical data, such as an IP address and a browser type, in its server logs.</p>
+
+          <h3 class="acc__sub"><span class="acc__no">2.</span> How the name is used</h3>
+          <p>The first name is stored only so the owner can acknowledge the follow request. No account, password, email address or profile is created, and no other personal data is requested.</p>
+
+          <h3 class="acc__sub"><span class="acc__no">3.</span> How likes are used</h3>
+          <p>A like is recorded against a project and is aggregated into a single total. Likes are not linked to a name and are not shown to visitors individually.</p>
+
+          <h3 class="acc__sub"><span class="acc__no">4.</span> Cookies and tracking</h3>
+          <p>This site sets no advertising or analytics cookies, uses no tracking pixels, and does not sell, rent or share data with third parties. Local browser storage is used only to remember interactions on this device, such as a liked project or a follow already submitted.</p>
+
+          <h3 class="acc__sub"><span class="acc__no">5.</span> Where the data is stored</h3>
+          <p>The like count and the submitted names are stored on Supabase, which acts as a data processor for this site. Contact with the owner happens outside this site, through email, WhatsApp, phone or social platforms, and those services apply their own privacy policies.</p>
+
+          <h3 class="acc__sub"><span class="acc__no">6.</span> Retention</h3>
+          <p>Submitted names are kept indefinitely unless deletion is requested.</p>
+
+          <h3 class="acc__sub"><span class="acc__no">7.</span> Deletion requests</h3>
+          <p>A visitor can ask for their name to be deleted at any time through the email or WhatsApp link in the contact section. The request is handled manually and no other action is required.</p>
+
+          <h3 class="acc__sub"><span class="acc__no">8.</span> Changes to this policy</h3>
+          <p>This policy may be updated. The last updated date is shown at the top of this section.</p>
+
+          <h3 class="acc__sub"><span class="acc__no">9.</span> Children</h3>
+          <p>This site is not directed at children under 13 and does not knowingly collect data from them.</p>
+
+          <h3 class="acc__sub"><span class="acc__no">10.</span> Governing law</h3>
+          <p>This Agreement shall be governed by and construed in accordance with the laws of Algeria.</p>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       VIEW 4 - PROFILE
+       ======================================================================= -->
+  <section class="view" id="view-profile" data-view-panel="profile">
+    <div class="page page--profile">
+
+      <header class="profile-head">
+        <img class="avatar avatar--lg" src="icons/profile.jpg" alt="" width="88" height="88">
+        <div class="profile-stat">
+          <strong class="profile-stat__num" id="project-count">0</strong>
+          <span class="profile-stat__label">projects</span>
+        </div>
+      </header>
+
+      <div class="profile-info">
+        <p class="profile-name" data-string="profileName"></p>
+        <p class="profile-bio" data-string="bio"></p>
+      </div>
+
+      <div class="profile-actions">
+        <button class="btn btn--follow" type="button" id="btn-follow" aria-pressed="false" data-string="follow"></button>
+        <a class="btn btn--ghost" id="btn-message" href="https://wa.me/213652212137" target="_blank" rel="noopener noreferrer" data-string="message"></a>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Profile sections">
+        <button class="tab is-active" type="button" role="tab" id="tab-posts" aria-selected="true" aria-controls="panel-posts" aria-label="Posts" data-tab="posts"></button>
+        <button class="tab" type="button" role="tab" id="tab-skills" aria-selected="false" aria-controls="panel-skills" aria-label="Skills" data-tab="skills"></button>
+      </div>
+
+      <div class="tab-panel" id="panel-posts" role="tabpanel" aria-labelledby="tab-posts">
+        <!-- Generated from the POSTS section in js/app.js -->
+        <div class="post-grid" id="posts-grid"></div>
+      </div>
+
+      <div class="tab-panel" id="panel-skills" role="tabpanel" aria-labelledby="tab-skills" hidden>
+        <!-- Generated from DATA.SKILLS in js/app.js -->
+        <div class="skills-grid" id="skills-grid"></div>
+        <a class="btn btn--certificates glass" id="btn-certificates" href="#" target="_blank" rel="noopener noreferrer" data-string="certificatesButton"></a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       PROJECT DETAIL (opened from the home feed or from the profile grid)
+       ======================================================================= -->
+  <section class="view" id="view-post" data-view-panel="post">
+    <div class="post-wrap" id="post-body"></div>
+  </section>
+
+  <!-- =======================================================================
+       NAV BAR - floating, liquid glass, four sections only
+       ======================================================================= -->
+  <nav class="nav glass" aria-label="Main navigation">
+    <a class="nav__item" href="#home" data-route="home" aria-label="Home"></a>
+    <a class="nav__item" href="#contact" data-route="contact" aria-label="Contact"></a>
+    <a class="nav__item" href="#terms" data-route="terms" aria-label="Terms and privacy"></a>
+    <a class="nav__item" href="#profile" data-route="profile" aria-label="Profile"></a>
+  </nav>
+
+  <!-- =======================================================================
+       FIRST VISIT HINT
+       ======================================================================= -->
+  <div class="hint" id="hint" hidden>
+    <span class="hint__chev" id="hint-icon"></span>
+    <span class="hint__text" data-string="hint"></span>
+  </div>
+
+  <!-- =======================================================================
+       FOLLOW SHEET
+       ======================================================================= -->
+  <div class="sheet" id="follow-sheet" hidden>
+    <div class="sheet__backdrop" data-close-sheet></div>
+    <form class="sheet__panel glass" id="follow-form">
+      <div class="sheet__head">
+        <label class="sheet__label" for="follow-name" data-string="followSheetLabel"></label>
+        <button class="icon-btn icon-btn--sm" type="button" data-close-sheet aria-label="Close"></button>
+      </div>
+      <input class="input" id="follow-name" name="name" type="text" maxlength="40" autocomplete="given-name" enterkeyhint="done" required>
+      <button class="btn btn--accent btn--block" type="submit" data-string="followSheetConfirm"></button>
+    </form>
+  </div>
+
+  <!-- =======================================================================
+       POSTS SECTION - source blocks for the profile grid and detail view
+       -----------------------------------------------------------------------
+       HOW TO ADD A NEW POST
+       1. Copy everything between the START and END markers below.
+       2. Paste it ABOVE the first block (newest first).
+       3. Change: data-slug, data-title, data-description and the six image
+          src paths. Use the same slug and the same six images as the
+          matching PROJECT block above.
+       The grid, the detail view, the next arrow and the WhatsApp message all
+       read from these blocks. Adding a block needs zero JavaScript changes.
+       This container is hidden: it is a data source, not a visible section.
+       ======================================================================= -->
+  <div id="posts-source" hidden aria-hidden="true">
+
+    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
+    <article class="post" data-slug="TODO-project-1" data-title="TODO: project 1 title" data-description="TODO: project 1 description." data-handle="TODO: @handle">
+      <img src="images/MITS/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/MITS/8.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/MITS/7.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/MITS/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/MITS/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/MITS/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/MITS/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/MITS/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+    </article>
+    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
+
+    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
+    <article class="post" data-slug="TODO-project-2" data-title="TODO: project 2 title" data-description="TODO: project 2 description." data-handle="TODO: @handle">
+      <img src="images/fstWEBSITE/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/fstWEBSITE/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/fstWEBSITE/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/fstWEBSITE/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/fstWEBSITE/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/fstWEBSITE/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+    </article>
+    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
+
+
+
+    
+    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
+    <article class="post" data-slug="QR-menu" data-title="qr code menu" data-description="Digital MENU for pancho restaurant" data-handle="@pancho_restaurant">
+      <img src="images/PANCHO/5.webp" alt="PANCHO" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/PANCHO/2.webp" alt="PANCHO" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/PANCHO/1.webp" alt="PANCHO" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/PANCHO/4.webp" alt="PANCHO" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/PANCHO/3.webp" alt="PANCHO" width="1080" height="1080" loading="lazy" decoding="async">
+    </article>
+    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
+
+
+
+    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
+    <article class="post" data-slug="TODO-project-4" data-title="TODO: project 4 title" data-description="TODO: project 4 description." data-handle="TODO: @handle">
+      <img src="images/la maison cd/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/la maison cd/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/la maison cd/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/la maison cd/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/la maison cd/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/la maison cd/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/la maison cd/7.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/la maison cd/8.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/la maison cd/9.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+    </article>
+    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
+
+
+
+    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
+    <article class="post" data-slug="TODO-project-5" data-title="TODO: project 4 title" data-description="TODO: project 4 description." data-handle="TODO: @handle">
+      <img src="images/QR-menu/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/QR-menu/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/QR-menu/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/QR-menu/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/QR-menu/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/QR-menu/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/QR-menu/7.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/QR-menu/8.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+    </article>
+    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
+
+
+
+    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
+    <article class="post" data-slug="TODO-project-6" data-title="TODO: project 6 title" data-description="TODO: project 6 description." data-handle="TODO: @handle">
+      <img src="images/rtbeats/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/rtbeats/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/rtbeats/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/rtbeats/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/rtbeats/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/rtbeats/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+    </article>
+    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
+
+
+
+    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
+    <article class="post" data-slug="TODO-project-7" data-title="TODO: project 7 title" data-description="TODO: project 7 description." data-handle="TODO: @handle">
+      <img src="images/Medical/7.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/Medical/8.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/Medical/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/Medical/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/Medical/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/Medical/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/Medical/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/Medical/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+    </article>
+    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
+
+
+
+    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
+    <article class="post" data-slug="TODO-project-8" data-title="TODO: project 8 title" data-description="TODO: project 8 description." data-handle="TODO: @handle">
+      <img src="images/E-ROOM/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/E-ROOM/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/E-ROOM/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/E-ROOM/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/E-ROOM/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      <img src="images/E-ROOM/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+    </article>
+    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
+
+
+
+
+  </div>
+
+  <!-- Scripts: plain files, no modules, no build step. -->
+  <script src="js/icons.js" defer></script>
+  <script src="js/strings.js" defer></script>
+  <script src="js/data.js" defer></script>
+  <script src="js/supabase.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
