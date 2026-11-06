@@ -10,7 +10,7 @@
    - anything cross-origin (Supabase): never cached
    ========================================================================= */
 
-var CACHE_VERSION = 'riyad-portfolio-v25';
+var CACHE_VERSION = 'riyad-portfolio-v28';
 var SHELL_CACHE = CACHE_VERSION + '-shell';
 var IMAGE_CACHE = CACHE_VERSION + '-images';
 

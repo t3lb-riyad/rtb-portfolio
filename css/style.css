@@ -35,11 +35,12 @@
      so its bottom edge ends exactly on the bottom of the heart button; the
      avatar and the heart are the only things allowed to overlap the photo.
      The lift grows on short screens and is capped so the photo never leaves
-     the top. 135px = caption line (19) + gap (10) + visit button (40) + gap
-     (10) + share button (46) + gap (10), measured up from the heart's bottom. */
+     the top. 143px = caption line (19) + gap (10) + visit button (40) + gap
+     (10) + share button (48) + gap (10) + heart glyph inset (6), measured up
+     from the visible bottom edge of the heart icon. */
   --reel-media: min(100vw, var(--col), 56.25dvh);
   --reel-gap: calc((100dvh - var(--reel-media)) / 2);
-  --reel-clear: calc(var(--stack-bottom) + 135px);
+  --reel-clear: calc(var(--stack-bottom) + 143px);
   --reel-lift: max(0px, min(
     calc(var(--reel-clear) - var(--reel-gap)),
     calc(var(--reel-gap) - var(--reel-top))
@@ -339,13 +340,26 @@ h1, h2, h3, p, ol, ul {
 #home-heart,
 #home-share { align-self: flex-end; }
 
-/* Profile photo on the reels rail: a 30px circle inside the same 46px
-   tap target as the heart, so the two glyphs line up on the right edge. */
+/* Home rail sizing matches TikTok's phone action buttons: a 48px tap target
+   with a 36px glyph (the photo keeps the heart's 36px visible size). */
+#home-heart,
+#home-share {
+  width: 48px;
+  height: 48px;
+}
+
+#home-heart .icon,
+#home-share .icon {
+  width: 36px;
+  height: 36px;
+}
+
+/* Profile photo on the reels rail: a 48px circle with no border ring. */
 .reel-avatar {
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   flex: none;
   border-radius: 50%;
   -webkit-tap-highlight-color: transparent;
@@ -353,14 +367,12 @@ h1, h2, h3, p, ol, ul {
 
 .reel-avatar img {
   display: block;
-  width: 30px;
-  height: 30px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   object-fit: cover;
   background: var(--surface);
-  box-shadow:
-    0 0 0 1.5px rgba(245, 245, 245, 0.7),
-    0 1px 6px rgba(12, 16, 20, 0.85);
+  box-shadow: 0 1px 6px rgba(12, 16, 20, 0.85);
   transition: transform 0.16s var(--ease), box-shadow 0.16s var(--ease);
 }
 
@@ -369,9 +381,7 @@ h1, h2, h3, p, ol, ul {
 @media (hover: hover) and (pointer: fine) {
   .reel-avatar:hover img {
     transform: scale(1.08);
-    box-shadow:
-      0 0 0 1.5px var(--accent),
-      0 2px 10px rgba(12, 16, 20, 0.9);
+    box-shadow: 0 2px 10px rgba(12, 16, 20, 0.9);
   }
 }
 
