@@ -123,14 +123,59 @@
     });
   }
 
+  /* Image paths are compared as decoded, lower-case paths so the same photo
+     matches even when one block writes a different extension case. */
+  function imageKey(src) {
+    if (!src) return '';
+    try {
+      return decodeURIComponent(new URL(src, location.href).pathname).toLowerCase();
+    } catch (error) {
+      return String(src).toLowerCase();
+    }
+  }
+
+  /* A reel and its profile post may use different data-slug values (for
+     example "PANCHO" vs "menu-pancho"). Both blocks share the same photos,
+     so the post with the most images in common wins. */
+  function matchPost(reel) {
+    var direct = null;
+    state.posts.forEach(function (post) {
+      if (!direct && post.slug === reel.slug) direct = post;
+    });
+    if (direct) return direct;
+
+    var reelImages = {};
+    reel.images.forEach(function (src) { reelImages[imageKey(src)] = true; });
+
+    var best = null;
+    var bestScore = 0;
+    state.posts.forEach(function (post) {
+      var score = 0;
+      post.images.forEach(function (src) {
+        if (reelImages[imageKey(src)]) score++;
+      });
+      if (score > bestScore) { bestScore = score; best = post; }
+    });
+
+    return bestScore > 0 ? best : null;
+  }
+
   function findPost(slug) {
     var post = null;
     state.posts.forEach(function (item) { if (!post && item.slug === slug) post = item; });
     if (post) return post;
 
-    /* Fallback: a project without a matching post block still opens. */
+    /* A shared link may still carry the old reel slug. Resolve it to the
+       matching profile post so the description, handle and images are the
+       same ones shown from the profile grid. */
     var reel = null;
     state.reels.forEach(function (item) { if (!reel && item.slug === slug) reel = item; });
+    if (reel) {
+      var matched = matchPost(reel);
+      if (matched) return matched;
+    }
+
+    /* Last resort: a project with no matching post block still opens. */
     if (!reel) return null;
 
     return {
@@ -313,6 +358,23 @@
     likeSlug(slug);
   }
 
+  /* Likes saved before the Home rail used post slugs were stored under the
+     reel slug. Move them once so the old heart state is not lost. */
+  function migrateLegacyLikes() {
+    var map = likesMap();
+    var changed = false;
+
+    state.reels.forEach(function (reel) {
+      if (!reel.postSlug || reel.postSlug === reel.slug) return;
+      if (!map[reel.slug]) return;
+      map[reel.postSlug] = 1;
+      delete map[reel.slug];
+      changed = true;
+    });
+
+    if (changed) writeJSON(STORE.likes, map);
+  }
+
   /* -----------------------------------------------------------------------
      Share
      Opens the device share sheet (installed apps). Falls back to a silent
@@ -434,12 +496,21 @@
         var host = e.target.closest('[data-slug]');
         var slug = host ? host.getAttribute('data-slug') : null;
 
+        var host = e.target.closest('[data-slug]');
+        var slug = host ? host.getAttribute('data-slug') : null;
+
         if (!slug && !state.atEnd && state.reels[state.activeReel]) {
-          slug = state.reels[state.activeReel].slug;
+          slug = state.reels[state.activeReel].postSlug || state.reels[state.activeReel].slug;
         }
 
         if (slug) {
-          likeSlug(slug);
+          /* Resolve reel slugs so a double tap on Home likes the same post
+             that the profile grid and detail view like. */
+          var liked = null;
+          state.reels.forEach(function (item) {
+            if (!liked && item.slug === slug) liked = item.postSlug || item.slug;
+          });
+          likeSlug(liked || slug);
           spawnHeart(e.clientX, e.clientY);
         }
         return;
@@ -484,9 +555,10 @@
     var reel = state.reels[state.activeReel];
     if (!reel) return;
 
-    $('#home-heart').setAttribute('data-heart-slug', reel.slug);
-    $('#home-share').setAttribute('data-share-slug', reel.slug);
-    $('#home-visit').setAttribute('href', '#post/' + encodeURIComponent(reel.slug));
+    var slug = reel.postSlug || reel.slug;
+    $('#home-heart').setAttribute('data-heart-slug', slug);
+    $('#home-share').setAttribute('data-share-slug', slug);
+    $('#home-visit').setAttribute('href', '#post/' + encodeURIComponent(slug));
     $('#reel-caption').textContent = reel.caption || '';
     renderHearts();
   }
@@ -495,9 +567,16 @@
     state.reels = readReels();
 
     state.reels.forEach(function (reel) {
+      /* The like key, share link and Visit project all use the profile post
+         slug, so the Home rail and the profile share one like state. */
+      var post = matchPost(reel);
+      reel.postSlug = post ? post.slug : reel.slug;
+
       var carousel = $('.carousel', reel.el);
       if (carousel) initCarousel(carousel);
     });
+
+    migrateLegacyLikes();
 
     var feed = $('#scroll-feed');
     if (!feed || !('IntersectionObserver' in window)) return;

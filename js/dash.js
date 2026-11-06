@@ -1,8 +1,4 @@
-/* =========================================================================
-   dash.js
-   Reads two numbers from Supabase and nothing else.
-   Not referenced by the portfolio. Open /dash.html directly.
-   ========================================================================= */
+
 (function () {
   'use strict';
 

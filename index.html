@@ -16,16 +16,9 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-view="home">
-
-  <!-- =======================================================================
-       BRAND SPLASH (universal intro overlay)
-       First child of <body>. Fades out and unmounts itself after 3.5s.
-       Edit the logo path, slogan and footer text below.
-       ======================================================================= -->
   <div id="universalAppSplashLoader" class="splash-screen-overlay">
     <div class="splash-screen-center">
       <div class="splash-brand-logo-wrapper">
-        <!-- Dynamically configured central asset -->
         <img src="images/anilogo.png" alt="Brand Logo" class="splash-brand-logo-img">
       </div>
 
@@ -40,29 +33,10 @@
       <p>Powered by MITS</p>
     </div>
   </div>
-
-  <!-- =======================================================================
-       VIEW 1 - HOME (project reels)
-       ======================================================================= -->
+  <!-- reels rtbontop -->
   <section class="view" id="view-home" data-view-panel="home">
 
     <div class="feed" id="scroll-feed">
-
-      <!-- ===================================================================
-           PROJECTS / "SCROLL" SECTION
-           -------------------------------------------------------------------
-           HOW TO ADD A NEW PROJECT
-           1. Copy everything between the START and END markers below.
-           2. Paste it ABOVE the first block (newest project first).
-           3. Change: data-slug, data-title, data-caption and the six image
-              src paths. Keep the folder name equal to data-slug.
-           4. Same slug must exist in the POSTS section further down for the
-              profile grid and the detail view (see section 11 of the brief).
-           DO NOT change class names or data attributes.
-           Adding a block here needs zero JavaScript changes.
-           =================================================================== -->
-
-      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
       <article class="reel" data-slug="make-it-self" data-title="Make it self" data-caption="Check out the services in MITS website.">
         <div class="reel__media">
           <div class="carousel" data-carousel>
@@ -80,9 +54,7 @@
           </div>
         </div>
       </article>
-      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
 
-      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
       <article class="reel" data-slug="first-project" data-title="first project" data-caption="this was my first project in building websites.">
         <div class="reel__media">
           <div class="carousel" data-carousel>
@@ -98,9 +70,7 @@
           </div>
         </div>
       </article>
-      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
 
-      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
       <article class="reel" data-slug="PANCHO" data-title="PANCHO" data-caption="PANCHO MENU QR CODE">
         <div class="reel__media">
           <div class="carousel" data-carousel>
@@ -115,9 +85,7 @@
           </div>
         </div>
       </article>
-      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
 
-      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
       <article class="reel" data-slug="maison-cd" data-title="La Maison CD" data-caption="a special web features for a laptop store.">
         <div class="reel__media">
           <div class="carousel" data-carousel>
@@ -136,8 +104,7 @@
           </div>
         </div>
       </article>
-      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
-      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
+
       <article class="reel" data-slug="QR-menu" data-title="Qr menu" data-caption="a soulotion for restaurants to show their menu in a digital way.">
         <div class="reel__media">
           <div class="carousel" data-carousel>
@@ -155,8 +122,7 @@
           </div>
         </div>
       </article>
-      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
-      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
+
       <article class="reel" data-slug="rtb-eats" data-title="RTB Eats" data-caption="A unique web experience for a restaurant.">
         <div class="reel__media">
           <div class="carousel" data-carousel>
@@ -172,8 +138,7 @@
           </div>
         </div>
       </article>
-      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
-      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
+
       <article class="reel" data-slug="clinic-app" data-title="Clinic App" data-caption="An app for managing clinic appointments.">
         <div class="reel__media">
           <div class="carousel" data-carousel>
@@ -191,8 +156,7 @@
           </div>
         </div>
       </article>
-      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
-      <!-- ============ PROJECT BLOCK :: START COPY HERE ============ -->
+      <!-- bda mn hna -->
       <article class="reel" data-slug="My-room" data-title="My Room" data-caption="I created this to make my mother know where I am.">
         <div class="reel__media">
           <div class="carousel" data-carousel>
@@ -208,9 +172,9 @@
           </div>
         </div>
       </article>
-      <!-- ============ PROJECT BLOCK :: END COPY HERE ============== -->
+      <!-- hbes ! -->
 
-      <!-- End of feed. Shown only after the last project. -->
+      <!-- End of feed.-->
       <div class="reel reel--end" data-end>
         <div class="end-card">
           <h2 class="end-card__title" data-string="homeHeading"></h2>
@@ -221,7 +185,6 @@
 
     </div>
 
-    <!-- Floating actions. Fixed above the nav bar, never touching it. -->
     <div class="reel-actions" id="home-actions" hidden>
       <a class="reel-avatar" id="home-avatar" href="#profile" aria-label="Open profile">
         <img src="icons/profile.jpg" alt="" width="30" height="30" decoding="async">
@@ -234,9 +197,7 @@
 
   </section>
 
-  <!-- =======================================================================
-       VIEW 2 - CONTACT
-       ======================================================================= -->
+  <!--contact -->
   <section class="view" id="view-contact" data-view-panel="contact">
     <div class="page page--contact">
       <h1 class="page__title" data-string="contactHeading"></h1>
@@ -245,14 +206,12 @@
     </div>
   </section>
 
-  <!-- =======================================================================
-       VIEW 3 - TERMS
-       ======================================================================= -->
+  <!--terms -->
   <section class="view" id="view-terms" data-view-panel="terms">
     <div class="page">
       <h1 class="page__title" data-string="termsHeading"></h1>
 
-      <!-- ---------------- Terms & Conditions ---------------- -->
+      <!-- ---------------- Terms & Conditions  -->
       <section class="acc" data-acc>
         <button class="acc__head" type="button" aria-expanded="true" aria-controls="acc-terms">
           <span data-string="termsTitle"></span>
@@ -271,7 +230,7 @@
         </div>
       </section>
 
-      <!-- ---------------- Privacy Policy ---------------- -->
+      <!--  Privacy Policy  -->
       <section class="acc" data-acc>
         <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-privacy">
           <span data-string="privacyTitle"></span>
@@ -314,9 +273,7 @@
     </div>
   </section>
 
-  <!-- =======================================================================
-       VIEW 4 - PROFILE
-       ======================================================================= -->
+  <!--profile -->
   <section class="view" id="view-profile" data-view-panel="profile">
     <div class="page page--profile">
 
@@ -356,17 +313,10 @@
 
     </div>
   </section>
-
-  <!-- =======================================================================
-       PROJECT DETAIL (opened from the home feed or from the profile grid)
-       ======================================================================= -->
   <section class="view" id="view-post" data-view-panel="post">
     <div class="post-wrap" id="post-body"></div>
   </section>
 
-  <!-- =======================================================================
-       NAV BAR - floating, liquid glass, four sections only
-       ======================================================================= -->
   <nav class="nav glass" aria-label="Main navigation">
     <a class="nav__item" href="#home" data-route="home" aria-label="Home"></a>
     <a class="nav__item" href="#contact" data-route="contact" aria-label="Contact"></a>
@@ -374,17 +324,10 @@
     <a class="nav__item" href="#profile" data-route="profile" aria-label="Profile"></a>
   </nav>
 
-  <!-- =======================================================================
-       FIRST VISIT HINT
-       ======================================================================= -->
   <div class="hint" id="hint" hidden>
     <span class="hint__chev" id="hint-icon"></span>
     <span class="hint__text" data-string="hint"></span>
   </div>
-
-  <!-- =======================================================================
-       FOLLOW SHEET
-       ======================================================================= -->
   <div class="sheet" id="follow-sheet" hidden>
     <div class="sheet__backdrop" data-close-sheet></div>
     <form class="sheet__panel glass" id="follow-form">
@@ -397,23 +340,21 @@
     </form>
   </div>
 
-  <!-- =======================================================================
-       POSTS SECTION - source blocks for the profile grid and detail view
-       -----------------------------------------------------------------------
-       HOW TO ADD A NEW POST
-       1. Copy everything between the START and END markers below.
-       2. Paste it ABOVE the first block (newest first).
-       3. Change: data-slug, data-title, data-description and the six image
-          src paths. Use the same slug and the same six images as the
-          matching PROJECT block above.
-       The grid, the detail view, the next arrow and the WhatsApp message all
-       read from these blocks. Adding a block needs zero JavaScript changes.
-       This container is hidden: it is a data source, not a visible section.
-       ======================================================================= -->
+  
   <div id="posts-source" hidden aria-hidden="true">
 
-    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
-    <article class="post" data-slug="Make-It-Self" data-title="Make It Self" data-description="TODO: project 1 description." data-handle="@make_it_self">
+    <!-- bda hna -->
+    <article class="post" data-slug="Make-It-Self" data-title="Make It Self" data-description="Make It Self is your fully integrated digital partner, where creativity meets technology to transform your ideas into impactful digital identities and experiences. We provide projects with a comprehensive digital ecosystem that combines a high-performance online presence, translating their identity into fast, responsive interfaces, with intelligent automation solutions and custom AI agents that streamline operations. We also deliver professional photography and visual content that showcase products and services at their best, all through an end-to-end process that supports every project from concept to launch. We don't just execute; we build a digital presence that drives your project toward sustainable growth and long-term stability.
+      Professional websites that reflect your brand identity
+      Modern interfaces with a seamless user experience
+      Fast performance with fully responsive design
+      Smart automation solutions to streamline workflows
+      Custom AI agents tailored to your business needs
+      Digital solutions that support your business growth
+      Professional photography that showcases your products and services
+      High-quality photo editing with exceptional results
+      End-to-end project delivery, from concept to launch
+      Your digital partner, combining technology and creativity" data-handle="@make_it_self">
       <img src="images/MITS/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/MITS/8.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/MITS/7.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
@@ -423,10 +364,9 @@
       <img src="images/MITS/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/MITS/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
     </article>
-    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
+    <!-- hbes -->
 
-    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
-    <article class="post" data-slug="First-Project" data-title="First Project" data-description="TODO: project 2 description." data-handle="@first_project">
+    <article class="post" data-slug="First-Project" data-title="First Project" data-description="This is my very first personal digital platform, which I designed and developed to showcase and share my creative talent in photography, featuring my personal introduction and visual works." data-handle="@first_project">
       <img src="images/fstWEBSITE/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/fstWEBSITE/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/fstWEBSITE/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
@@ -434,25 +374,41 @@
       <img src="images/fstWEBSITE/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/fstWEBSITE/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
     </article>
-    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
 
 
 
     
-    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
-    <article class="post" data-slug="menu-pancho" data-title="pancho menu" data-description="Digital MENU for pancho restaurant" data-handle="@pancho_restaurant">
+    <article class="post" data-slug="menu-pancho" data-title="pancho menu" data-description="MITS provides a digital menu platform for restaurants that offers customers a simple and interactive browsing experience while allowing restaurant owners to manage their menu content through an intuitive admin panel.
+      Responsive Design – Optimized to provide a seamless experience across all devices
+      Modern UI/UX Design – Attractive and intuitive design that provides a smooth and enjoyable user experience
+      Multilingual Support – Browse the menu in multiple languages
+      Admin Dashboard – Centralized dashboard for managing website content.
+      Menu & Category Management – Create, edit, organize menu items, categories, and pricing options
+      Contact & Social Media Integration – Display contact information and social media links
+      Security & Data Protection – Ensure secure access and protect website data" data-handle="@pancho_restaurant">
       <img src="images/PANCHO/5.webp" alt="PANCHO" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/PANCHO/2.webp" alt="PANCHO" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/PANCHO/1.webp" alt="PANCHO" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/PANCHO/4.webp" alt="PANCHO" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/PANCHO/3.webp" alt="PANCHO" width="1080" height="1080" loading="lazy" decoding="async">
     </article>
-    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
 
 
 
-    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
-    <article class="post" data-slug="la-maison-cd" data-title="La Maison CD" data-description="TODO: project 4 description." data-handle="@cd_maison">
+    <article class="post" data-slug="la-maison-cd" data-title="La Maison CD" data-description="La Maison CD is a modern and elegant website I designed and developed to showcase a premium brand with a clean, immersive user experience. I focused on creating a responsive interface, smooth navigation, and a visually appealing design that highlights the brand's identity while ensuring fast performance across all devices. The project reflects my approach to combining aesthetics with functionality to deliver a seamless web experience.
+    Product attribute management (RAM, Storage, Color, HDD with price modifiers)
+    Financial analytics with profit calculator (COGS from actual sold quantities)
+    Customer management with order history
+    Abandoned cart tracking
+    Exchange request management (approve/reject)
+    Expense tracking (create, list, filter)
+    Per-product profit breakdown (units sold, revenue, cost, margin)
+    Inventory/low-stock alerts
+    Tracking pixels management (Facebook/Google)
+    Loyal customer identification
+    Delivery fee management
+    Per-product discount tier editing
+    Secure JWT authentication" data-handle="@cd_maison">
       <img src="images/la maison cd/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/la maison cd/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/la maison cd/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
@@ -463,12 +419,27 @@
       <img src="images/la maison cd/8.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/la maison cd/9.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
     </article>
-    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
 
 
 
-    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
-    <article class="post" data-slug="QR-menu" data-title="QR Menu" data-description="TODO: project 4 description." data-handle="@qr_menu">
+    <article class="post" data-slug="QR-menu" data-title="QR Menu" data-description="
+      MITS introduces a complete digital solution for modern restaurants, combining a seamless QR Code ordering experience with a powerful management system. Designed to optimize daily operations, improve service efficiency, and provide a smarter way to manage restaurant processes.
+      1-Restaurant Management System (Admin Dashboard)
+      Secure authentication system for dashboard protection
+      Real-time order management and step-by-step status tracking.
+      Dynamic menu management with categories, images, and visibility controls.
+      Advanced sales analytics, revenue reports, and best-selling dishes
+      Integrated inventory, supplier management, and invoice management
+      Automated QR Code generation for restaurant tables
+      Responsive and user-friendly dashboard optimized for desktop and mobile
+      2-Restaurant QR Menu
+      Supports both Online and Offline modes for flexible access
+      Modern digital menu showcasing images, descriptions, and up-to-date prices
+      Interactive shopping cart with instant, real-time total updates
+      Real-time order status tracking after submission
+      Smooth checkout experience with secure order finalization and confirmation
+      Responsive design fully optimized for mobile and tablet screens
+      Fast, intuitive, and seamless interface without page reloads" data-handle="@qr_menu">
       <img src="images/QR-menu/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/QR-menu/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/QR-menu/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
@@ -478,12 +449,10 @@
       <img src="images/QR-menu/7.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/QR-menu/8.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
     </article>
-    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
 
 
 
-    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
-    <article class="post" data-slug="rtb-eats" data-title="RTB Eats" data-description="TODO: project 6 description." data-handle="@rtb_eats">
+    <article class="post" data-slug="rtb-eats" data-title="RTB Eats" data-description="RTB's Eats is an interactive web and mobile application developed by MITS for a restaurant branding concept. The platform is designed to provide customers with a seamless browsing, ordering, and feedback experience." data-handle="@rtb_eats">
       <img src="images/rtbeats/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/rtbeats/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/rtbeats/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
@@ -491,12 +460,11 @@
       <img src="images/rtbeats/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/rtbeats/3.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
     </article>
-    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
 
 
 
-    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
-    <article class="post" data-slug="medical-app" data-title="Medical App" data-description="TODO: project 7 description." data-handle="@medical_app">
+    <article class="post" data-slug="medical-app" data-title="Medical App" data-description="Because your comfort is part of your treatment, MITS offers a digital queue system for clinics designed to provide a smoother and more organized waiting experience for both the user and the clinic. The system connects the user and the clinic in a single platform to facilitate the management of the waiting process and digitally track turns.   MAKE IT SELF is your comprehensive digital partner aimed at developing smart technical solutions that help projects improve their digital presence and simplify business management.
+    this project is a complete digital solution that transforms a traditional medical clinic's operation. It replaces physical queues with virtual ones, offering patients convenience through pre-booking while providing clinic staff with a robust set of tools for management, from the receptionist desk to the doctor's office, and a professional digital display for the waiting room." data-handle="@medical_app">
       <img src="images/Medical/7.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/Medical/8.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/Medical/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
@@ -506,12 +474,10 @@
       <img src="images/Medical/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/Medical/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
     </article>
-    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
 
 
 
-    <!-- ============= POST BLOCK :: START COPY HERE ============= -->
-    <article class="post" data-slug="E-ROOM" data-title="E-ROOM" data-description="TODO: project 8 description." data-handle="@e_room">
+    <article class="post" data-slug="E-ROOM" data-title="E-ROOM" data-description="E-ROOM is a innovative solution designed to enhance the way people interact with their living spaces. By integrating smart technology and intuitive design, E-ROOM offers a seamless experience that adapts to the user's needs and preferences." data-handle="@e_room">
       <img src="images/E-ROOM/6.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/E-ROOM/4.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/E-ROOM/2.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
@@ -519,10 +485,6 @@
       <img src="images/E-ROOM/5.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
       <img src="images/E-ROOM/1.webp" alt="" width="1080" height="1080" loading="lazy" decoding="async">
     </article>
-    <!-- ============= POST BLOCK :: END COPY HERE =============== -->
-
-
-
 
   </div>
 

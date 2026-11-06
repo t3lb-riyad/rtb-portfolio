@@ -1,11 +1,4 @@
-/* =========================================================================
-   supabase.js
-   The only network integration in the app, and it is optional.
 
-   Nothing here is allowed to block the interface or show an error.
-   If the URL or the anon key is empty, every call is a silent no-op.
-   The visitor always sees a normal like and a normal follow.
-   ========================================================================= */
 window.PortfolioDB = (function () {
   'use strict';
 
@@ -17,7 +10,6 @@ window.PortfolioDB = (function () {
     return String(window.DATA.SUPABASE_URL).replace(/\/+$/, '');
   }
 
-  /* Fire and forget. Never throws, never returns a promise to the caller. */
   function insert(table, row) {
     if (!configured()) return;
 
