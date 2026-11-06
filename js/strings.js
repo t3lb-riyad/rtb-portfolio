@@ -12,9 +12,9 @@ window.STRINGS = {
 
   /* --- home --- */
   hint: 'Swipe up to scroll',
-  visitProject: 'Visit project',
-  checkProfile: 'Check profile',
-  anotherTour: 'Another tour?',
+  visitProject: 'Check project',
+  checkProfile: 'Discover More',
+  anotherTour: 'Another Tour?',
 
   /* --- profile buttons and tabs --- */
   follow: 'Follow',
