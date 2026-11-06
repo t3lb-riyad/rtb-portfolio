@@ -6,7 +6,7 @@ window.STRINGS = {
   bio: 'I\'ll keep trying until I make it self.\nCheck services in MITS :\n https://make-it-self.vercel.app/',
 
   /* --- page headings --- */
-  homeHeading: 'Home ',
+  homeHeading: 'What do you want to see?',
   contactHeading: 'Contact',
   termsHeading: 'Terms and privacy',
 

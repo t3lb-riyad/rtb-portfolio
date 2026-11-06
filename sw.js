@@ -1,14 +1,3 @@
-/* =========================================================================
-   sw.js
-   Offline shell.
-
-   Bump CACHE_VERSION after editing any shell file so the new copy is used.
-   Strategy:
-   - navigations: network first, cache fallback (so edits show up right away)
-   - css / js / manifest / icons: cache first
-   - images: stale while revalidate
-   - anything cross-origin (Supabase): never cached
-   ========================================================================= */
 
 var CACHE_VERSION = 'riyad-portfolio-v29';
 var SHELL_CACHE = CACHE_VERSION + '-shell';
